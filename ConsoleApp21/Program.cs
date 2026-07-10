@@ -1,5 +1,9 @@
-﻿using System;
+﻿using System.IO;
+using System.Linq;
+using System;
 using System.Diagnostics.Tracing;
+using System.Runtime.Serialization;
+
 
 namespace StudentManagementSystem
 {
@@ -8,6 +12,11 @@ namespace StudentManagementSystem
         static void Main(string[] args)
         {
             List<string > ogrenciler=new List<string>();
+            if(File.Exists("ogrenciler.txt"))
+            {
+                ogrenciler = File.ReadAllLines("ogrenciler.txt").ToList();
+               
+            }
             bool devam = true;
             while(devam)
             {
@@ -27,13 +36,19 @@ namespace StudentManagementSystem
                         case 1:
                             Console.Write("İsim giriniz:");
                             string isim = Console.ReadLine();
-                            if (ogrenciler.Contains(isim))
+                            if(string.IsNullOrWhiteSpace(isim))
+                            {
+                                Console.WriteLine(" İsim boş bırakılamaz.");
+                            }
+                            else if (ogrenciler.Contains(isim))
                             {
                                 Console.WriteLine("Bu öğrenci zaten kayıtlı.");
                             }
                             else
                             {
                                 ogrenciler.Add(isim);
+                                File.WriteAllLines("ogrenciler.txt",ogrenciler);
+         
                                 Console.WriteLine("Öğrenci eklendi.");
                             }
                             break;
@@ -70,6 +85,7 @@ namespace StudentManagementSystem
                             if (ogrenciler.Contains(ad))
                             {
                                 ogrenciler.Remove(ad);
+                                File.WriteAllLines("ogrenciler.txt", ogrenciler);
                                 Console.WriteLine(" Öğrenci silindi.");
                             }
                             else Console.WriteLine("Öğrenci kaydı bulunmamaktadır.");
