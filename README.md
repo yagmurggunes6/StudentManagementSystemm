@@ -22,4 +22,11 @@ Technologies
   About
 
 This project was developed to practice fundamental C# programming concepts such as lists, loops, conditions, methods, and exception handling.
-Developed by Yağmur Güneş.
+Additional Features
+
+- File Persistence
+- Input Validation
+- Duplicate Student Prevention
+- Exception Handling
+This project helped me improve my skills in C#, file operations, exception handling, and GitHub version control.
+Developed by Yağmur Güneş using C# and .NET.
